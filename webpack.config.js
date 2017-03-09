@@ -1,7 +1,24 @@
+var webpack = require('webpack');
+
 module.exports = {
   //Where webpack starts to process the code
-  entry: './app/app.jsx',
-
+  entry: [
+    'script!jquery/dist/jquery.min.js',
+    'script!foundation-sites/dist/foundation.min.js',
+    './app/app.jsx'
+  ],
+    //Provide a set of key values pairs, the key is the module name and the
+    //value is the variable name we wan available inside of our externals
+    // script files
+    externals: {
+      jquery: 'jQuery'
+    },
+    plugins: [
+      new webpack.ProvidePlugin({
+        '$': 'jquery',
+        'jQuery': 'jquery'
+      })
+    ],
   //output from webpack
   output: {
     path: __dirname,

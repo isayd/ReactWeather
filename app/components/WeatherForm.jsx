@@ -11,6 +11,8 @@ var WeatherForm = React.createClass({
       this.props.onSearch(location);
     }
   },
+
+  
   render: function () {
     return (
         <div>

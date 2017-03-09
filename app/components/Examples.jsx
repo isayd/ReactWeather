@@ -17,10 +17,10 @@ var Examples = (props) =>{
         <p>Here are a few example locations to try out:</p>
         <ol>
           <li>
-            <Link to='/?location=Mexico_City'>Mexico City</Link>
+            <Link to='/?location=Mexico City'>Mexico City</Link>
           </li>
           <li>
-            <Link to ='/?location=Fremont_California'>Fremont, California</Link>
+            <Link to ='/?location=Fremont California'>Fremont, California</Link>
           </li>
         </ol>
       </div>

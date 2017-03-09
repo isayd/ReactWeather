@@ -13,11 +13,13 @@ var Weather = React.createClass({
   },
 
   handleSearch: function (location) {
-
+    // Clear data after every search
     var that = this;
     this.setState({
       isLoading: true,
-      errorMessage: undefined
+      errorMessage: undefined,
+      location: undefined,
+      temp: undefined
     });
 
     openWeatherMap.getTemp(location).then(function (temp) {
@@ -33,6 +35,34 @@ var Weather = React.createClass({
       });
     });
   },
+
+  // componentDidMount() is invoked immediately after a component is mounted
+  componentDidMount: function(){
+    // React Router give access to a lot props, some of them are query strings
+    var location = this.props.location.query.location;
+
+    // validate query to execute handleSearch
+    if (location && location.length > 0){
+      this.handleSearch(location);
+      //Update url so the location is no longer displayed in the component
+      window.location.hash = '#/';
+    }
+  },
+  // React Router is gonna update the props of weather.jsx when the url changes
+  // Call every time the component props are updated
+  // componentWillReceiveProps() is invoked before a mounted component receives new props.
+  // React doesn't call componentWillReceiveProps with initial props during mounting
+  // This solves the problem to update Weather conponent with data from Nav
+  componentWillReceiveProps: function(newProps){
+    var location = newProps.location.query.location;
+    // validate query to execute handleSearch
+    if (location && location.length > 0){
+      this.handleSearch(location);
+      //Update url so the location is no longer displayed in the component
+      window.location.hash = '#/';
+    }
+  },
+
 
 /* ------------------------ Render Function ------------------------ */
   render: function () {
